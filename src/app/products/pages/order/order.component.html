@@ -8,8 +8,26 @@
         <p-button  label="ToggleCase" icon="pi pi-search" class="mr-2" styleClass="p-button-help" (onClick)="toggleUpperCase()"></p-button>
     </div>
     <div class="p-toolbar-group-end">
-        <p-button  label="Por nombre" icon="pi pi-sort" class="mr-2" styleClass="p-button-danger"></p-button>
-        <p-button  label="Por Vuela" icon="pi pi-sort" class="mr-2" styleClass="p-button-warning"></p-button>
-        <p-button  label="Por Color" icon="pi pi-sort" class="mr-2" styleClass="p-button"></p-button>
+        <p-button (onClick)="changeOrder('name')"  label="Por nombre" icon="pi pi-sort" class="mr-2" styleClass="p-button-danger"></p-button>
+        <p-button (onClick)="changeOrder('cantFly')"  label="Por Vuela" icon="pi pi-sort" class="mr-2" styleClass="p-button-warning"></p-button>
+        <p-button (onClick)="changeOrder('color')"  label="Por Color" icon="pi pi-sort" class="mr-2" styleClass="p-button"></p-button>
     </div>
 </p-toolbar>
+<p-panel header="Tabla de SuperHeroes">
+    <p-table [value]="heros | sortBy:orderBy:filtroInverso" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>Cant Fly?</th>
+                <th>Color</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-hero>
+            <tr>
+                <td>{{ hero.name }}</td>
+                <td>{{ hero.cantFly | cantFly | titlecase}}</td>
+                <td>{{ hero.color }}</td>
+            </tr>
+        </ng-template>
+    </p-table>    
+</p-panel>
